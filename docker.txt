@@ -1,0 +1,71 @@
+docker image pull alpine:latest  -->pulling image from official docker hub
+docker image pull aamirpinger/flag:latest  --> pulling latest version of flag image from public repo of aamirpinger username
+docker image rm alpine:latest  --> remove image which is not being running on a container if running on a container then first stop the container
+docker run -it alpine:latest sh -->run the container of that image in interactive mode
+docker images --> same as bellow
+or 
+docker image ls  -->shows all images in your machine
+docker container ls -a -->all containers stopped and running all
+docker container ls -->only running container shows
+docker ps -->same as above
+docker ps -a -->same as above
+in container: exit then container will stop
+in container: ctrl+pq to exit from container without stoping the container
+every container has its own file structure
+
+docker exec -it <name given by docker to an image> --> to execute the running container> sh
+docker exec -it <id given by docker to an image> --> to execute the running container> sh
+
+after executing the running container if you write exit instead of ctrl+pq then it will not stop
+
+docker container stop <id or name of image given by docker> --> stop the running container
+if you want to remove image then first remove its container by
+docker rm <container id or name>
+
+then you can delete the image by 
+docker image rm <image name>
+
+interactive mode--> Docker interactive mode is that it allows us to execute commands at the time of running the container.
+detached mode-->Detached mode, shown by the option --detach or -d, means that a Docker container runs in the background of your terminal. It does not receive input or display output.
+
+docker container run -d alpine:latest  -->run container in detached mode
+
+
+//publishing container on localhost and use the application on browser//
+docker container run -d -p 5010:80 <image name>
+now on browser localhost:5010 it transfer you on port 80 
+docker container run -d -p --name <your chosen name of container> 5010:80 <image name>
+
+//steps to containerize an app//
+
+1)code your app or increment
+2)crate a docker file that describes your app and its dependencies
+3)build command to build an image of that increment
+4)now make container and run the container
+//docker file creation//
+
+-just a textfile
+-if you have js and html based website then we use nginx image
+1)FROM nginx
+2)COPY . /user/share/nginx/html
+-alpine image is used for nodeJS applications
+
+//containerization
+
+go to the project directory and write the following commands
+1)docker build -t <app-name> dot
+2)docker container run --name=first-docker-cont -d -p 8500:80 <app name>
+
+//pushing image to docker hub//
+
+1) docker tag <image name> <username>/<image name>
+2) docker push <username>/<image name>:version
+if permission denied then login with docker by
+1)docker login-->enter username and password when it says
+//run image after pushing//
+docker run -d --name=<newcopyname> <username>/<image name>:versionpushed
+
+//more commands//
+1)docker history <image name>
+2)docker inspect <image name>
+
